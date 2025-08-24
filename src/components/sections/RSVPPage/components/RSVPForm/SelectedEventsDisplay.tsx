@@ -22,10 +22,10 @@ const SelectedEventsDisplay = ({ selectedEvents }: SelectedEventsDisplayProps) =
       {selectedEvents.map((event, index) => (
         <Box key={event.id} sx={{ mb: index < selectedEvents.length - 1 ? 1 : 0 }}>
           <Typography variant="body1" sx={{ fontWeight: 600 }}>
-            {event.nameHebrew} - {event.name}
+            {event.nameHebrew}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {event.date} • {event.location}
+                          {event.dateHebrew} • {event.locationHebrew}
           </Typography>
           {event.startTime && (
             <Typography variant="body2" color="text.secondary">

@@ -7,8 +7,8 @@ import { MAP_ACTIONS } from '../../../constants/maps';
  * @param event - Event object with coordinates and address
  */
 export const openInMaps = (event: Event): void => {
-  const { coordinates, address } = event;
-  const urls = getMapUrls(MAP_ACTIONS.NAVIGATION, coordinates, address);
+  const { coordinates } = event;
+  const urls = getMapUrls(MAP_ACTIONS.NAVIGATION, coordinates, event.addressHebrew);
   
   if (isMobileDevice()) {
     // For mobile, try to open in navigation apps
@@ -35,8 +35,8 @@ export const openInMaps = (event: Event): void => {
  * @param event - Event object with address
  */
 export const openAddressInMaps = (event: Event): void => {
-  const { address } = event;
-  const urls = getMapUrls(MAP_ACTIONS.SEARCH, undefined, address);
+  const { addressHebrew } = event;
+  const urls = getMapUrls(MAP_ACTIONS.SEARCH, undefined, addressHebrew);
   
   if (isMobileDevice()) {
     // For mobile, try to open in navigation apps

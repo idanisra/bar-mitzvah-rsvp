@@ -52,6 +52,15 @@ const EventSelector = () => {
             fontWeight: 600,
             textTransform: 'none',
             minWidth: 140,
+            borderRadius: '8px',
+            '&:first-of-type': {
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
+            },
+            '&:last-of-type': {
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+            },
             '&.Mui-selected': {
               backgroundColor: theme.palette.primary.main,
               color: 'white',
@@ -65,24 +74,18 @@ const EventSelector = () => {
           }
         }}
       >
-        <ToggleButton value="shabbat-chatan" aria-label="shabbat chatan">
+        <ToggleButton value="shabbat-chatan" aria-label="שבת חתן">
           <Box sx={{ textAlign: 'center' }}>
             <Typography variant="body2" sx={{ display: 'block', mb: 0.5 }}>
               {EVENTS['shabbat-chatan'].nameHebrew}
             </Typography>
-            <Typography variant="caption" sx={{ display: 'block' }}>
-              {EVENTS['shabbat-chatan'].name}
-            </Typography>
           </Box>
         </ToggleButton>
         
-        <ToggleButton value="hanachat-tefillin" aria-label="hanachat tefillin">
+        <ToggleButton value="hanachat-tefillin" aria-label="הנחת תפילין">
           <Box sx={{ textAlign: 'center' }}>
             <Typography variant="body2" sx={{ display: 'block', mb: 0.5 }}>
               {EVENTS['hanachat-tefillin'].nameHebrew}
-            </Typography>
-            <Typography variant="caption" sx={{ display: 'block' }}>
-              {EVENTS['hanachat-tefillin'].name}
             </Typography>
           </Box>
         </ToggleButton>

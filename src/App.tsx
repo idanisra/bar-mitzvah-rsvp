@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 
 // Context
 import { EventProvider } from './contexts/EventContext';
@@ -16,22 +16,22 @@ const theme = createTheme({
   direction: 'rtl',
   palette: {
     primary: {
-      main: '#008080',
-      light: '#20B2AA',
-      dark: '#006666'
+      main: '#8B4513', // Saddle Brown - warm, earthy tone
+      light: '#A0522D', // Sienna - lighter brown
+      dark: '#654321' // Dark Brown - deeper brown
     },
     secondary: {
-      main: '#FFD700',
-      light: '#FFE44D',
-      dark: '#FFB300'
+      main: '#DAA520', // Goldenrod - warm gold
+      light: '#F0E68C', // Khaki - light khaki
+      dark: '#B8860B' // Dark Goldenrod - deeper gold
     },
     background: {
-      default: '#fafafa',
-      paper: '#ffffff'
+      default: 'rgba(255, 255, 255, 0.1)',
+      paper: 'rgba(255, 255, 255, 0.95)'
     },
     text: {
-      primary: '#1a1a1a',
-      secondary: '#666666'
+      primary: '#2F2F2F', // Dark charcoal
+      secondary: '#5D5D5D' // Medium gray
     }
   },
   typography: {
@@ -92,7 +92,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 16,
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+          boxShadow: '0 4px 20px rgba(139, 69, 19, 0.15)',
+          border: '1px solid rgba(139, 69, 19, 0.1)'
         }
       }
     },
@@ -111,16 +112,27 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <EventProvider>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/rsvp" element={<RSVPPage />} />
-            </Routes>
-          </Layout>
-        </Router>
-      </EventProvider>
+      <Box
+        sx={{
+          backgroundImage: 'url(/assets/images/Background.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh'
+        }}
+      >
+        <EventProvider>
+          <Router>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/rsvp" element={<RSVPPage />} />
+              </Routes>
+            </Layout>
+          </Router>
+        </EventProvider>
+      </Box>
     </ThemeProvider>
   );
 }

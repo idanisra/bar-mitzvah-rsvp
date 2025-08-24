@@ -4,21 +4,21 @@ import InfoCard from './InfoCard';
 const InfoCardsSection = () => {
   const infoCards = [
     {
-      title: "What to Bring",
+      title: "מה להביא",
       items: [
-        "Your beautiful smile",
-        "Comfortable shoes for dancing",
-        "Camera for memories",
-        "Gift (optional but appreciated)"
+        "החיוך היפה שלכם",
+        "נעליים נוחות לריקודים",
+        "מצלמה לזיכרונות",
+        "מתנה (אופציונלי אבל מוערך)"
       ]
     },
     {
-      title: "Important Notes",
+      title: "הערות חשובות",
       items: [
-        "Please arrive 15 minutes early",
-        "Parking available on-site",
-        "Dress code: Semi-formal to formal",
-        "Children welcome with supervision"
+        "אנא הגיעו 15 דקות מוקדם",
+        "חניה זמינה במקום",
+        "קוד לבוש: חצי רשמי עד רשמי",
+        "ילדים מתקבלים בברכה עם השגחה"
       ]
     }
   ];

@@ -8,23 +8,23 @@ const SpecialPerks = () => {
   const perks = [
     {
       icon: <Hotel sx={{ fontSize: 40, color: theme.palette.primary.main }} />,
-      title: "Hotel Accommodation",
-      description: "Special rates at Vert Hotel for the entire weekend"
+      title: "לינה במלון",
+      description: "מחירים מיוחדים במלון ורט לכל סוף השבוע"
     },
     {
       icon: <DirectionsCar sx={{ fontSize: 40, color: theme.palette.primary.main }} />,
-      title: "Transportation",
-      description: "Shuttle service between venues and hotel"
+      title: "הסעה",
+      description: "שירות הסעה בין המקומות והמלון"
     },
     {
       icon: <Restaurant sx={{ fontSize: 40, color: theme.palette.primary.main }} />,
-      title: "All Meals Included",
-      description: "Shabbat meals and Monday celebration dinner"
+      title: "כל הארוחות כלולות",
+      description: "ארוחות שבת וארוחת ערב חגיגית ביום שני"
     },
     {
       icon: <Celebration sx={{ fontSize: 40, color: theme.palette.primary.main }} />,
-      title: "VIP Experience",
-      description: "Priority seating and special recognition"
+      title: "חוויה VIP",
+      description: "מושבים מועדפים והכרה מיוחדת"
     }
   ];
 

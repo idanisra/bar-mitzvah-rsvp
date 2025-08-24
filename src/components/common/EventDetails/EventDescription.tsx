@@ -10,10 +10,10 @@ const EventDescription = ({ event }: EventDescriptionProps) => {
     <Card sx={{ mb: 4, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
       <CardContent>
         <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
-          About the Event
+          על האירוע
         </Typography>
         <Typography variant="body1" paragraph>
-          {event.description}
+          {event.descriptionHebrew}
         </Typography>
         <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
           {event.descriptionHebrew}

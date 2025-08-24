@@ -8,7 +8,7 @@ interface EventAdditionalInfoProps {
 const EventAdditionalInfo = ({ event }: EventAdditionalInfoProps) => {
   const theme = useTheme();
 
-  if (!event.additionalInfo || event.additionalInfo.length === 0) {
+  if (!event.additionalInfoHebrew || event.additionalInfoHebrew.length === 0) {
     return null;
   }
 
@@ -16,10 +16,10 @@ const EventAdditionalInfo = ({ event }: EventAdditionalInfoProps) => {
     <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
       <CardContent>
         <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
-          Additional Information
+          מידע נוסף
         </Typography>
         <Grid container spacing={2}>
-          {event.additionalInfo.map((info, index) => (
+          {event.additionalInfoHebrew.map((info, index) => (
             <Grid item xs={12} sm={6} key={index}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <Chip 

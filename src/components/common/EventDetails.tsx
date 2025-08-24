@@ -35,7 +35,7 @@ const EventDetails = () => {
             fontWeight: 400
           }}
         >
-          {event.name}
+          {event.nameHebrew}
         </Typography>
       </Box>
 
@@ -49,7 +49,7 @@ const EventDetails = () => {
                 Date
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                {event.date}
+                {event.dateHebrew}
               </Typography>
               <Typography variant="body1" sx={{ fontWeight: 600 }}>
                 {event.dateHebrew}
@@ -63,10 +63,10 @@ const EventDetails = () => {
             <CardContent>
               <LocationOn sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
               <Typography variant="h6" gutterBottom>
-                Location
+                מיקום
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                {event.location}
+                {event.locationHebrew}
               </Typography>
               <Typography variant="body1" sx={{ fontWeight: 600 }}>
                 {event.locationHebrew}
@@ -80,14 +80,14 @@ const EventDetails = () => {
             <CardContent>
               <AccessTime sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
               <Typography variant="h6" gutterBottom>
-                Time
+                שעה
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                 {event.startTime}
               </Typography>
               {event.endTime && (
                 <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                  to {event.endTime}
+                  עד {event.endTime}
                 </Typography>
               )}
             </CardContent>
@@ -99,10 +99,10 @@ const EventDetails = () => {
             <CardContent>
               <Style sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
               <Typography variant="h6" gutterBottom>
-                Dress Code
+                קוד לבוש
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                {event.dressCode}
+                {event.dressCodeHebrew}
               </Typography>
               <Typography variant="body1" sx={{ fontWeight: 600 }}>
                 {event.dressCodeHebrew}
@@ -116,10 +116,10 @@ const EventDetails = () => {
       <Card sx={{ mb: 4, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
         <CardContent>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
-            About the Event
+            על האירוע
           </Typography>
           <Typography variant="body1" paragraph>
-            {event.description}
+            {event.descriptionHebrew}
           </Typography>
           <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
             {event.descriptionHebrew}
@@ -128,14 +128,14 @@ const EventDetails = () => {
       </Card>
 
       {/* Additional Information */}
-      {event.additionalInfo && event.additionalInfo.length > 0 && (
+      {event.additionalInfoHebrew && event.additionalInfoHebrew.length > 0 && (
         <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
           <CardContent>
             <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
-              Additional Information
+              מידע נוסף
             </Typography>
             <Grid container spacing={2}>
-              {event.additionalInfo.map((info, index) => (
+              {event.additionalInfoHebrew.map((info, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                     <Chip 
@@ -152,18 +152,6 @@ const EventDetails = () => {
                       {info}
                     </Typography>
                   </Box>
-                  {event.additionalInfoHebrew && event.additionalInfoHebrew[index] && (
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
-                        ml: 4, 
-                        color: theme.palette.text.secondary,
-                        fontStyle: 'italic'
-                      }}
-                    >
-                      {event.additionalInfoHebrew[index]}
-                    </Typography>
-                  )}
                 </Grid>
               ))}
             </Grid>

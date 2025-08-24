@@ -31,7 +31,7 @@ const EventLocationCard = ({ event, index, onNavigate, onViewAddress }: EventLoc
             fontSize: 28
           }} />
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            {event.nameHebrew} - {event.name}
+            {event.nameHebrew}
           </Typography>
         </Box>
         
@@ -39,14 +39,14 @@ const EventLocationCard = ({ event, index, onNavigate, onViewAddress }: EventLoc
           {event.locationHebrew}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          {event.location}
+          {event.locationHebrew}
         </Typography>
         
         <Typography variant="body2" sx={{ mb: 2, fontFamily: 'monospace' }}>
           {event.addressHebrew}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2, fontFamily: 'monospace' }}>
-          {event.address}
+          {event.addressHebrew}
         </Typography>
 
         <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>

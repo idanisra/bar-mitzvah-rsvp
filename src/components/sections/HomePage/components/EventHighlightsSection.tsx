@@ -7,29 +7,29 @@ const EventHighlightsSection = () => {
   const highlights = [
     {
       icon: "🎉",
-      title: "Celebration",
+      title: "חגיגה",
       details: [
-        "Special moments with family and friends",
-        "Traditional Jewish customs and rituals",
-        "Beautiful venue and atmosphere"
+        "רגעים מיוחדים עם משפחה וחברים",
+        "מנהגים וטקסים יהודיים מסורתיים",
+        "מקום יפה ואווירה נפלאה"
       ]
     },
     {
       icon: "🍽️",
-      title: "Dining",
+      title: "אוכל",
       details: [
-        "Delicious kosher cuisine",
-        "Special dietary accommodations",
-        "Festive meal service"
+        "מטבח כשר טעים",
+        "התאמות תזונתיות מיוחדות",
+        "שירות ארוחות חגיגי"
       ]
     },
     {
       icon: "🎵",
-      title: "Entertainment",
+      title: "בידור",
       details: [
-        "Live music and celebration",
-        "Traditional Jewish music",
-        "Joyful atmosphere"
+        "מוזיקה חיה וחגיגה",
+        "מוזיקה יהודית מסורתית",
+        "אווירה שמחה"
       ]
     }
   ];
@@ -46,7 +46,7 @@ const EventHighlightsSection = () => {
           color: theme.palette.primary.main
         }}
       >
-        Event Highlights
+        הדגשים של האירוע
       </Typography>
       
       <Grid container spacing={4}>

@@ -31,7 +31,7 @@ const EventHeader = ({ event }: EventHeaderProps) => {
           fontWeight: 400
         }}
       >
-        {event.name}
+        {event.nameHebrew}
       </Typography>
     </Box>
   );

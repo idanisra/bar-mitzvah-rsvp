@@ -6,16 +6,15 @@ import { MAP_ACTIONS } from '../../constants/maps';
 
 interface EventMapProps {
   events: Event[];
-  title?: string;
   titleHebrew?: string;
 }
 
-const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומי האירועים" }: EventMapProps) => {
+const EventMap = ({ events, titleHebrew = "מיקומי האירועים" }: EventMapProps) => {
   const theme = useTheme();
 
   const openInMaps = (event: Event): void => {
-    const { coordinates, address } = event;
-    const urls = getMapUrls(MAP_ACTIONS.NAVIGATION, coordinates, address);
+    const { coordinates } = event;
+    const urls = getMapUrls(MAP_ACTIONS.NAVIGATION, coordinates, event.addressHebrew);
     
     if (isMobileDevice()) {
       if (isIOSDevice()) {
@@ -32,8 +31,8 @@ const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומ
   };
 
   const openAddressInMaps = (event: Event): void => {
-    const { address } = event;
-    const urls = getMapUrls(MAP_ACTIONS.SEARCH, undefined, address);
+    const { addressHebrew } = event;
+    const urls = getMapUrls(MAP_ACTIONS.SEARCH, undefined, addressHebrew);
     
     if (isMobileDevice()) {
       if (isIOSDevice()) {
@@ -55,9 +54,6 @@ const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומ
         <Box sx={{ textAlign: 'center', mb: 3 }}>
           <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
             {titleHebrew}
-          </Typography>
-          <Typography variant="h6" component="h4" color="text.secondary">
-            {title}
           </Typography>
         </Box>
 
@@ -81,26 +77,20 @@ const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומ
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <LocationOn sx={{ 
                     color: index === 0 ? theme.palette.primary.main : theme.palette.secondary.main,
-                    mr: 1,
+                    ml: 1,
                     fontSize: 28
                   }} />
                   <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                    {event.nameHebrew} - {event.name}
+                    {event.nameHebrew}
                   </Typography>
                 </Box>
                 
                 <Typography variant="body1" sx={{ mb: 1, fontWeight: 500 }}>
                   {event.locationHebrew}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  {event.location}
-                </Typography>
                 
                 <Typography variant="body2" sx={{ mb: 2, fontFamily: 'monospace' }}>
                   {event.addressHebrew}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2, fontFamily: 'monospace' }}>
-                  {event.address}
                 </Typography>
 
                 <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>

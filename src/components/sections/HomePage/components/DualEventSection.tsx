@@ -18,7 +18,7 @@ const DualEventSection = () => {
             textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
           }}
         >
-          ✨ מיוחד לשתי האירועים ✨
+          ✨ מיוחד לשני האירועים ✨
         </Typography>
         <Typography 
           variant="h6" 

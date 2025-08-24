@@ -14,29 +14,29 @@ const EventInfoGrid = ({ event }: EventInfoGridProps) => {
     <Grid container spacing={3} sx={{ mb: 4 }}>
       <EventInfoCard
         icon={<CalendarToday sx={{ fontSize: 40, color: theme.palette.primary.main }} />}
-        title="Date"
-        primaryText={event.date}
+        title="תאריך"
+        primaryText={event.dateHebrew}
         secondaryText={event.dateHebrew}
       />
       
       <EventInfoCard
         icon={<LocationOn sx={{ fontSize: 40, color: theme.palette.primary.main }} />}
-        title="Location"
-        primaryText={event.location}
+        title="מיקום"
+        primaryText={event.locationHebrew}
         secondaryText={event.locationHebrew}
       />
       
       <EventInfoCard
         icon={<AccessTime sx={{ fontSize: 40, color: theme.palette.primary.main }} />}
-        title="Time"
+        title="שעה"
         primaryText={event.startTime || ''}
-        secondaryText={event.endTime ? `to ${event.endTime}` : ''}
+        secondaryText={event.endTime ? `עד ${event.endTime}` : ''}
       />
       
       <EventInfoCard
         icon={<Style sx={{ fontSize: 40, color: theme.palette.primary.main }} />}
-        title="Dress Code"
-        primaryText={event.dressCode || ''}
+        title="קוד לבוש"
+        primaryText={event.dressCodeHebrew || ''}
         secondaryText={event.dressCodeHebrew || ''}
       />
     </Grid>

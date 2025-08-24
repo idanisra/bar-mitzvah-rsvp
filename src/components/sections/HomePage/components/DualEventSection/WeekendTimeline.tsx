@@ -10,7 +10,7 @@ const WeekendTimeline = () => {
     <Card sx={{ mb: 4, backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
       <CardContent>
         <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
-          🗓️ Complete Weekend Timeline
+          🗓️ לו״ז לשבת
         </Typography>
         
         <Grid container spacing={3}>
@@ -22,16 +22,16 @@ const WeekendTimeline = () => {
               backgroundColor: 'rgba(25, 118, 210, 0.05)'
             }}>
               <Typography variant="h6" sx={{ color: theme.palette.primary.main, mb: 2 }}>
-                {shabbatEvent.nameHebrew} - {shabbatEvent.name}
+                {shabbatEvent.nameHebrew}
               </Typography>
               <Typography variant="body1" sx={{ mb: 1 }}>
-                <strong>Friday:</strong> {shabbatEvent.startTime}
+                <strong>יום שישי:</strong> {shabbatEvent.startTime}
               </Typography>
               <Typography variant="body1" sx={{ mb: 1 }}>
-                <strong>Saturday:</strong> {shabbatEvent.endTime}
+                <strong>יום שבת:</strong> {shabbatEvent.endTime}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {shabbatEvent.description}
+                {shabbatEvent.descriptionHebrew}
               </Typography>
             </Box>
           </Grid>
@@ -44,13 +44,13 @@ const WeekendTimeline = () => {
               backgroundColor: 'rgba(156, 39, 176, 0.05)'
             }}>
               <Typography variant="h6" sx={{ color: theme.palette.secondary.main, mb: 2 }}>
-                {hanachatEvent.nameHebrew} - {hanachatEvent.name}
+                {hanachatEvent.nameHebrew}
               </Typography>
               <Typography variant="body1" sx={{ mb: 1 }}>
-                <strong>Monday:</strong> {hanachatEvent.startTime} - {hanachatEvent.endTime}
+                <strong>יום שני:</strong> {hanachatEvent.startTime} - {hanachatEvent.endTime}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {hanachatEvent.description}
+                {hanachatEvent.descriptionHebrew}
               </Typography>
             </Box>
           </Grid>

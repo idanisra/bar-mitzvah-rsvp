@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Box, useTheme, useMediaQuery } from '@mui/material';
+import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText, Box, useTheme, useMediaQuery } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -36,12 +36,19 @@ const Navigation = () => {
   );
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          בר מצווה - אישור השתתפות
-        </Typography>
-        
+    <AppBar 
+      position="sticky" 
+      sx={{ 
+        backgroundColor: 'rgba(139, 69, 19, 0.95)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: '1px solid rgba(139, 69, 19, 0.2)',
+        boxShadow: '0 2px 20px rgba(139, 69, 19, 0.3)'
+      }}
+    >
+      <Toolbar sx={{ 
+        justifyContent: 'flex-end',
+        direction: 'rtl'
+      }}>
         {isMobile ? (
           <>
             <IconButton
@@ -49,6 +56,7 @@ const Navigation = () => {
               aria-label="open drawer"
               edge="start"
               onClick={() => setMobileOpen(true)}
+              sx={{ color: 'white' }}
             >
               <MenuIcon />
             </IconButton>
@@ -61,13 +69,32 @@ const Navigation = () => {
             </Drawer>
           </>
         ) : (
-          <Box sx={{ display: 'flex', gap: 2 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            gap: 2,
+            direction: 'rtl'
+          }}>
             {menuItems.map((item) => (
               <Button
                 key={item.path}
-                color="inherit"
                 onClick={() => handleNavigation(item.path)}
                 variant={location.pathname === item.path ? 'contained' : 'text'}
+                sx={{
+                  color: 'white',
+                  '&.MuiButton-contained': {
+                    backgroundColor: 'rgba(218, 165, 32, 0.9)',
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: 'rgba(218, 165, 32, 1)',
+                    }
+                  },
+                  '&.MuiButton-text': {
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    }
+                  }
+                }}
               >
                 {item.label}
               </Button>

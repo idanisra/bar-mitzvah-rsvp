@@ -7,7 +7,7 @@ import EventHighlightsSection from './components/EventHighlightsSection';
 import InfoCardsSection from './components/InfoCardsSection';
 import AdditionalInfoSection from './components/AdditionalInfoSection';
 import FinalCTASection from './components/FinalCTASection';
-import EventMap from '../../common/EventMap';
+import InteractiveMap from '../../common/InteractiveMap';
 import { getAllEvents } from '../../../config/events';
 
 const HomePage = () => {
@@ -28,11 +28,10 @@ const HomePage = () => {
         <EventDetails />
       </Container>
 
-      {/* Event Map */}
+      {/* Interactive Event Map */}
       <Container maxWidth="lg">
-        <EventMap 
+        <InteractiveMap 
           events={allEvents}
-          title="Event Locations"
           titleHebrew="מיקומי האירועים"
         />
       </Container>
