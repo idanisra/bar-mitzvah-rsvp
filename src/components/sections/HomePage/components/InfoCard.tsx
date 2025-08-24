@@ -1,23 +1,26 @@
-import { Box, Typography, Card, CardContent } from '@mui/material';
+import { Typography, Card, CardContent, Box } from '@mui/material';
 
-const InfoCard = ({ title, items }) => {
+interface InfoCardProps {
+  title: string;
+  items: string[];
+}
 
+const InfoCard = ({ title, items }: InfoCardProps) => {
   return (
-    <Card >
-      <CardContent >
-        <Typography variant="h6" >
+    <Card sx={{ height: '100%' }}>
+      <CardContent>
+        <Typography variant="h6" component="h3" gutterBottom>
           {title}
         </Typography>
-        
-        {items.map((item, index) => (
-          <Typography 
-            key={index} 
-            variant="body1" 
-            
-          >
-            • {item}
-          </Typography>
-        ))}
+        <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+          {items.map((item: string, index: number) => (
+            <Box component="li" key={index} sx={{ mb: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                {item}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
       </CardContent>
     </Card>
   );

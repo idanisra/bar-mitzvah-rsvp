@@ -12,21 +12,55 @@ const HeroSection = () => {
   };
 
   return (
-    <Box >
-      {/* Background Pattern Overlay */}
-      <Box  />
-      
-      <Box >
+    <Box 
+      sx={{
+        backgroundImage: 'url(/assets/images/Background.jpeg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          zIndex: 1
+        }
+      }}
+    >
+      <Box 
+        sx={{
+          textAlign: 'center',
+          color: 'white',
+          zIndex: 2,
+          position: 'relative',
+          px: 4
+        }}
+      >
         <Typography
           variant={isMobile ? 'h3' : 'h1'}
-          
+          sx={{ 
+            fontWeight: 900, 
+            mb: 3,
+            textShadow: '2px 2px 4px rgba(0,0,0,0.7)'
+          }}
         >
           בר מצווה לדניאל
         </Typography>
         
         <Typography
           variant={isMobile ? 'h6' : 'h4'}
-          
+          sx={{ 
+            mb: 4,
+            textShadow: '1px 1px 2px rgba(0,0,0,0.7)'
+          }}
         >
           חגיגה מיוחדת ומרגשת
         </Typography>
@@ -35,7 +69,16 @@ const HeroSection = () => {
           variant="contained"
           size="large"
           onClick={handleRSVP}
-          
+          sx={{
+            px: 4,
+            py: 2,
+            fontSize: '1.2rem',
+            fontWeight: 600,
+            backgroundColor: theme.palette.secondary.main,
+            '&:hover': {
+              backgroundColor: theme.palette.secondary.dark,
+            }
+          }}
         >
           אישור השתתפות
         </Button>

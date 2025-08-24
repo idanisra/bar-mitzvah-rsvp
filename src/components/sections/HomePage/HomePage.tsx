@@ -1,17 +1,66 @@
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
+import EventSelector from '../../common/EventSelector';
+import EventDetails from '../../common/EventDetails';
+import DualEventSection from './components/DualEventSection';
 import HeroSection from './components/HeroSection';
-import EventDetailsSection from './components/EventDetailsSection';
+import EventHighlightsSection from './components/EventHighlightsSection';
+import InfoCardsSection from './components/InfoCardsSection';
 import AdditionalInfoSection from './components/AdditionalInfoSection';
 import FinalCTASection from './components/FinalCTASection';
+import EventMap from '../../common/EventMap';
+import { getAllEvents } from '../../../config/events';
 
 const HomePage = () => {
+  const allEvents = getAllEvents();
 
   return (
-    <Box >
+    <Box>
+      {/* Hero Section */}
       <HeroSection />
-      <EventDetailsSection />
-      <AdditionalInfoSection />
-      <FinalCTASection />
+      
+      {/* Event Selector */}
+      <Container maxWidth="lg">
+        <EventSelector />
+      </Container>
+
+      {/* Event Details */}
+      <Container maxWidth="lg">
+        <EventDetails />
+      </Container>
+
+      {/* Event Map */}
+      <Container maxWidth="lg">
+        <EventMap 
+          events={allEvents}
+          title="Event Locations"
+          titleHebrew="מיקומי האירועים"
+        />
+      </Container>
+
+      {/* Special Section for Dual Event Guests */}
+      <Container maxWidth="lg">
+        <DualEventSection />
+      </Container>
+
+      {/* Event Highlights */}
+      <Container maxWidth="lg">
+        <EventHighlightsSection />
+      </Container>
+
+      {/* Information Cards */}
+      <Container maxWidth="lg">
+        <InfoCardsSection />
+      </Container>
+
+      {/* Additional Information Section */}
+      <Container maxWidth="lg">
+        <AdditionalInfoSection />
+      </Container>
+
+      {/* Final Call to Action */}
+      <Container maxWidth="lg">
+        <FinalCTASection />
+      </Container>
     </Box>
   );
 };

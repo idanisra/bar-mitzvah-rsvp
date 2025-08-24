@@ -1,13 +1,17 @@
-import { Box } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import Navigation from './Navigation';
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
-    <Box sx={{ minHeight: '100vh', width: '100%' }}>
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navigation />
-      <Box component="main">
+      <Container component="main" sx={{ flex: 1, py: 4 }}>
         {children}
-      </Box>
+      </Container>
     </Box>
   );
 };

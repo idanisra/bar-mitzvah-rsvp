@@ -1,21 +1,22 @@
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Button, Box } from '@mui/material';
+import { Send as SendIcon } from '@mui/icons-material';
 
-const FormSubmit = ({ loading }) => {
+interface FormSubmitProps {
+  loading: boolean;
+}
 
+const FormSubmit = ({ loading }: FormSubmitProps) => {
   return (
-    <Box >
+    <Box sx={{ mt: 3, textAlign: 'center' }}>
       <Button
         type="submit"
         variant="contained"
         size="large"
         disabled={loading}
-        
+        startIcon={<SendIcon />}
+        sx={{ minWidth: 200 }}
       >
-        {loading ? (
-          <CircularProgress size={28} color="inherit" />
-        ) : (
-          '🎉 שלח אישור השתתפות 🎉'
-        )}
+        {loading ? 'שולח...' : 'שלח אישור השתתפות'}
       </Button>
     </Box>
   );

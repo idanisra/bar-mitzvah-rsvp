@@ -1,8 +1,43 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* RTL specific adjustments */
+[dir="rtl"] .MuiTypography-root {
+  text-align: right;
+}
+
+[dir="rtl"] .MuiCard-root {
+  text-align: right;
+}
+
+[dir="rtl"] .MuiButton-root {
   text-align: center;
+}
+
+/* Ensure proper text alignment for specific components */
+.MuiTypography-root[align="center"] {
+  text-align: center !important;
+}
+
+.MuiTypography-root[align="left"] {
+  text-align: left !important;
+}
+
+.MuiTypography-root[align="right"] {
+  text-align: right !important;
 }
 
 .logo {

@@ -1,29 +1,30 @@
-import { Box, Typography, Card, CardContent } from '@mui/material';
+import { Card, CardContent, Typography, Box } from '@mui/material';
 
-const EventCard = ({ icon, title, details }) => {
+interface EventCardProps {
+  icon: React.ReactNode;
+  title: string;
+  details: string[];
+}
 
+const EventCard = ({ icon, title, details }: EventCardProps) => {
   return (
-    <Card >
-      <CardContent >
-        <Box >
-          <Typography >
-            {icon}
-          </Typography>
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
+        <Box sx={{ mb: 2, fontSize: '3rem' }}>
+          {icon}
         </Box>
-        
-        <Typography variant="h6" >
+        <Typography variant="h6" component="h3" gutterBottom>
           {title}
         </Typography>
-        
-        {details.map((detail, index) => (
-          <Typography 
-            key={index} 
-            variant="body1" 
-            
-          >
-            {detail}
-          </Typography>
-        ))}
+        <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+          {details.map((detail: string, index: number) => (
+            <Box component="li" key={index} sx={{ mb: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                {detail}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
       </CardContent>
     </Card>
   );

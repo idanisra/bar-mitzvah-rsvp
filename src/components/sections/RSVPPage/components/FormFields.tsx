@@ -1,11 +1,16 @@
 import { Grid } from '@mui/material';
-import { useMediaQuery, useTheme } from '@mui/material';
 import FormField from './FormField';
 
-const FormFields = ({ formData, handleChange }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+interface FormData {
+  [key: string]: string;
+}
 
+interface FormFieldsProps {
+  formData: FormData;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+}
+
+const FormFields = ({ formData, handleChange }: FormFieldsProps) => {
   const fields = [
     {
       name: 'name',
@@ -13,61 +18,67 @@ const FormFields = ({ formData, handleChange }) => {
       type: 'text',
       required: true,
       fullWidth: true,
-      gridProps: { xs: 12 }
+      gridProps: { xs: 12, sm: 6 }
+    },
+    {
+      name: 'email',
+      label: 'אימייל',
+      type: 'email',
+      required: true,
+      fullWidth: true,
+      gridProps: { xs: 12, sm: 6 }
     },
     {
       name: 'phone',
       label: 'מספר טלפון',
       type: 'tel',
       required: true,
-      gridProps: { xs: 12, sm: 6, md: 3 }
+      fullWidth: true,
+      gridProps: { xs: 12, sm: 6 }
     },
     {
-      name: 'email',
-      label: 'דואר אלקטרוני',
-      type: 'email',
-      required: false,
-      gridProps: { xs: 12, sm: 6, md: 3 }
-    },
-    {
-      name: 'attending',
-      label: 'האם תשתתף?',
+      name: 'guests',
+      label: 'מספר אורחים',
       type: 'select',
       required: true,
-      options: [
-        { value: '', label: 'בחר אפשרות', disabled: true },
-        { value: 'yes', label: 'כן, אשתתף' },
-        { value: 'no', label: 'לא, לא אוכל להשתתף' },
-        { value: 'maybe', label: 'אולי' }
-      ],
-      gridProps: { xs: 12, sm: 6, md: 3 }
+      fullWidth: true,
+      options: ['1', '2', '3', '4', '5+'],
+      gridProps: { xs: 12, sm: 6 }
     },
     {
-      name: 'numberOfGuests',
-      label: 'מספר אורחים',
-      type: 'text',
+      name: 'dietary',
+      label: 'הגבלות תזונתיות',
+      type: 'select',
       required: false,
-      gridProps: { xs: 12, sm: 6, md: 3 }
+      fullWidth: true,
+      options: ['אין', 'צמחוני', 'טבעוני', 'ללא גלוטן', 'ללא לקטוז', 'אחר'],
+      gridProps: { xs: 12, sm: 6 }
     },
     {
       name: 'message',
-      label: 'הודעה אישית',
+      label: 'הודעה נוספת (אופציונלי)',
       type: 'textarea',
       required: false,
       fullWidth: true,
-      rows: isMobile ? 4 : 6,
+      rows: 3,
       gridProps: { xs: 12 }
     }
   ];
 
   return (
-    <Grid container spacing={3} >
+    <Grid container spacing={3}>
       {fields.map((field) => (
         <Grid item {...field.gridProps} key={field.name}>
           <FormField
-            {...field}
-            value={formData[field.name]}
+            name={field.name}
+            label={field.label}
+            type={field.type}
+            required={field.required}
+            fullWidth={field.fullWidth}
+            value={formData[field.name] || ''}
             onChange={handleChange}
+            options={field.options}
+            rows={field.rows}
           />
         </Grid>
       ))}

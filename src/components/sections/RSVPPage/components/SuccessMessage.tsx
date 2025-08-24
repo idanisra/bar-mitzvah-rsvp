@@ -1,35 +1,27 @@
-import { Box, Typography, Button, Paper } from '@mui/material';
+import { Typography, Button, Paper } from '@mui/material';
+import { CheckCircle as CheckCircleIcon } from '@mui/icons-material';
 
-const SuccessMessage = ({ onReset }) => {
+interface SuccessMessageProps {
+  onReset: () => void;
+}
 
+const SuccessMessage = ({ onReset }: SuccessMessageProps) => {
   return (
-    <Box >
-      {/* Background Pattern Overlay */}
-      <Box  />
-      
-      <Paper >
-        <Typography variant="h2" >
-          🎉 תודה רבה! 🎉
-        </Typography>
-        
-        <Typography variant="h5" >
-          אישור ההשתתפות שלך נשלח בהצלחה!
-        </Typography>
-        
-        <Typography variant="body1" >
-          נשמח לראותך באירוע המיוחד שלנו
-        </Typography>
-        
-        <Button
-          variant="contained"
-          size="large"
-          onClick={onReset}
-          
-        >
-          שלח אישור נוסף
-        </Button>
-      </Paper>
-    </Box>
+    <Paper elevation={3} sx={{ p: 4, maxWidth: 600, mx: 'auto', textAlign: 'center' }}>
+      <CheckCircleIcon sx={{ fontSize: 64, color: 'success.main', mb: 2 }} />
+      <Typography variant="h4" component="h2" gutterBottom color="success.main">
+        תודה לכם!
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 3 }}>
+        אישור ההשתתפות שלכם נשלח בהצלחה. אנחנו מצפים לחגוג איתכם!
+      </Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+        Your RSVP has been submitted successfully. We look forward to celebrating with you!
+      </Typography>
+      <Button variant="outlined" onClick={onReset}>
+        שלח אישור נוסף
+      </Button>
+    </Paper>
   );
 };
 

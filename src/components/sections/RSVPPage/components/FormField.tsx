@@ -1,36 +1,41 @@
-import { TextField, FormControl, Select, MenuItem } from '@mui/material';
+import { TextField, MenuItem, FormControl, InputLabel, Select } from '@mui/material';
 
-const FormField = ({ 
-  name, 
-  label, 
-  type, 
-  required, 
-  fullWidth, 
-  value, 
-  onChange, 
-  options, 
-  rows 
-}) => {
+interface FormFieldProps {
+  name: string;
+  label: string;
+  type: string;
+  required: boolean;
+  fullWidth: boolean;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  options?: string[];
+  rows?: number;
+}
 
-  if (type === 'select') {
+const FormField = ({
+  name,
+  label,
+  type,
+  required,
+  fullWidth,
+  value,
+  onChange,
+  options,
+  rows
+}: FormFieldProps) => {
+  if (type === 'select' && options) {
     return (
-      <FormControl fullWidth required={required} >
+      <FormControl fullWidth={fullWidth} required={required}>
+        <InputLabel>{label}</InputLabel>
         <Select
           name={name}
           value={value}
-          onChange={onChange}
-          displayEmpty
-          inputProps={{ dir: 'rtl' }}
-          
+          label={label}
+          onChange={(e) => onChange(e as React.ChangeEvent<HTMLInputElement>)}
         >
           {options.map((option) => (
-            <MenuItem 
-              key={option.value} 
-              value={option.value}
-              disabled={option.disabled}
-              
-            >
-              {option.label}
+            <MenuItem key={option} value={option}>
+              {option}
             </MenuItem>
           ))}
         </Select>
@@ -38,33 +43,18 @@ const FormField = ({
     );
   }
 
-  if (type === 'textarea') {
-    return (
-      <TextField
-        fullWidth={fullWidth}
-        name={name}
-        value={value}
-        onChange={onChange}
-        multiline
-        rows={rows}
-        label={label}
-        inputProps={{ dir: 'rtl' }}
-        
-      />
-    );
-  }
-
   return (
     <TextField
-      fullWidth={fullWidth}
       name={name}
+      label={label}
       type={type}
+      required={required}
+      fullWidth={fullWidth}
       value={value}
       onChange={onChange}
-      label={label}
-      required={required}
-      inputProps={{ dir: 'rtl' }}
-      
+      multiline={type === 'textarea'}
+      rows={rows}
+      variant="outlined"
     />
   );
 };
