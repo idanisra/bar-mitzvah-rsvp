@@ -1,50 +1,59 @@
 import { Event } from '../../../types/events';
+import { isMobileDevice, isIOSDevice, getMapUrls } from '../../../utils/deviceDetection';
+import { MAP_ACTIONS } from '../../../constants/maps';
 
-export const openInMaps = (event: Event) => {
-  const { lat, lng } = event.coordinates;
-  const address = encodeURIComponent(event.address);
+/**
+ * Open navigation to event location
+ * @param event - Event object with coordinates and address
+ */
+export const openInMaps = (event: Event): void => {
+  const { coordinates, address } = event;
+  const urls = getMapUrls(MAP_ACTIONS.NAVIGATION, coordinates, address);
   
-  // Check if mobile
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
-  if (isMobile) {
+  if (isMobileDevice()) {
     // For mobile, try to open in navigation apps
-    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=${address}`;
-    const appleMapsUrl = `http://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`;
-    
-    // Try to open Apple Maps first (iOS), then Google Maps
-    window.location.href = appleMapsUrl;
-    
-    // Fallback to Google Maps after a short delay
-    setTimeout(() => {
-      window.location.href = googleMapsUrl;
-    }, 1000);
+    if (isIOSDevice()) {
+      // Try Apple Maps first on iOS
+      window.location.href = urls.appleMaps;
+      
+      // Fallback to Google Maps after a short delay
+      setTimeout(() => {
+        window.location.href = urls.googleMaps;
+      }, 1000);
+    } else {
+      // For Android, use Google Maps directly
+      window.location.href = urls.googleMaps;
+    }
   } else {
     // For desktop, open in Google Maps
-    window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
+    window.open(urls.googleMaps, '_blank');
   }
 };
 
-export const openAddressInMaps = (event: Event) => {
-  const address = encodeURIComponent(event.address);
+/**
+ * Open address search in maps
+ * @param event - Event object with address
+ */
+export const openAddressInMaps = (event: Event): void => {
+  const { address } = event;
+  const urls = getMapUrls(MAP_ACTIONS.SEARCH, undefined, address);
   
-  // Check if mobile
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
-  if (isMobile) {
+  if (isMobileDevice()) {
     // For mobile, try to open in navigation apps
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${address}`;
-    const appleMapsUrl = `http://maps.apple.com/?q=${address}`;
-    
-    // Try to open Apple Maps first (iOS), then Google Maps
-    window.location.href = appleMapsUrl;
-    
-    // Fallback to Google Maps after a short delay
-    setTimeout(() => {
-      window.location.href = googleMapsUrl;
-    }, 1000);
+    if (isIOSDevice()) {
+      // Try Apple Maps first on iOS
+      window.location.href = urls.appleMaps;
+      
+      // Fallback to Google Maps after a short delay
+      setTimeout(() => {
+        window.location.href = urls.googleMaps;
+      }, 1000);
+    } else {
+      // For Android, use Google Maps directly
+      window.location.href = urls.googleMaps;
+    }
   } else {
     // For desktop, open in Google Maps
-    window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
+    window.open(urls.googleMaps, '_blank');
   }
 };

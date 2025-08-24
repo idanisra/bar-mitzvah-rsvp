@@ -1,6 +1,8 @@
 import { Box, Typography, Card, CardContent, Button, useTheme } from '@mui/material';
 import { LocationOn, Directions } from '@mui/icons-material';
 import { Event } from '../../types/events';
+import { isMobileDevice, isIOSDevice, getMapUrls } from '../../utils/deviceDetection';
+import { MAP_ACTIONS } from '../../constants/maps';
 
 interface EventMapProps {
   events: Event[];
@@ -11,52 +13,39 @@ interface EventMapProps {
 const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומי האירועים" }: EventMapProps) => {
   const theme = useTheme();
 
-  const openInMaps = (event: Event) => {
-    const { lat, lng } = event.coordinates;
-    const address = encodeURIComponent(event.address);
+  const openInMaps = (event: Event): void => {
+    const { coordinates, address } = event;
+    const urls = getMapUrls(MAP_ACTIONS.NAVIGATION, coordinates, address);
     
-    // Check if mobile
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-      // For mobile, try to open in navigation apps
-      const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=${address}`;
-      const appleMapsUrl = `http://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`;
-      
-      // Try to open Apple Maps first (iOS), then Google Maps
-      window.location.href = appleMapsUrl;
-      
-      // Fallback to Google Maps after a short delay
-      setTimeout(() => {
-        window.location.href = googleMapsUrl;
-      }, 1000);
+    if (isMobileDevice()) {
+      if (isIOSDevice()) {
+        window.location.href = urls.appleMaps;
+        setTimeout(() => {
+          window.location.href = urls.googleMaps;
+        }, 1000);
+      } else {
+        window.location.href = urls.googleMaps;
+      }
     } else {
-      // For desktop, open in Google Maps
-      window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
+      window.open(urls.googleMaps, '_blank');
     }
   };
 
-  const openAddressInMaps = (event: Event) => {
-    const address = encodeURIComponent(event.address);
+  const openAddressInMaps = (event: Event): void => {
+    const { address } = event;
+    const urls = getMapUrls(MAP_ACTIONS.SEARCH, undefined, address);
     
-    // Check if mobile
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-      // For mobile, try to open in navigation apps
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${address}`;
-      const appleMapsUrl = `http://maps.apple.com/?q=${address}`;
-      
-      // Try to open Apple Maps first (iOS), then Google Maps
-      window.location.href = appleMapsUrl;
-      
-      // Fallback to Google Maps after a short delay
-      setTimeout(() => {
-        window.location.href = googleMapsUrl;
-      }, 1000);
+    if (isMobileDevice()) {
+      if (isIOSDevice()) {
+        window.location.href = urls.appleMaps;
+        setTimeout(() => {
+          window.location.href = urls.googleMaps;
+        }, 1000);
+      } else {
+        window.location.href = urls.googleMaps;
+      }
     } else {
-      // For desktop, open in Google Maps
-      window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
+      window.open(urls.googleMaps, '_blank');
     }
   };
 
@@ -128,7 +117,7 @@ const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומ
                       }
                     }}
                   >
-                    Navigate
+                    ניווט
                   </Button>
                   
                   <Button
@@ -144,7 +133,7 @@ const EventMap = ({ events, title = "Event Locations", titleHebrew = "מיקומ
                       }
                     }}
                   >
-                    View Address
+                    צפה בכתובת
                   </Button>
                 </Box>
               </CardContent>
