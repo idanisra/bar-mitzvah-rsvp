@@ -27,7 +27,7 @@ const EventLocationCard = ({ event, index, onNavigate, onViewAddress }: EventLoc
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <LocationOn sx={{ 
             color: cardColor,
-            mr: 1,
+            mr: 3,
             fontSize: 28
           }} />
           <Typography variant="h6" sx={{ fontWeight: 600 }}>

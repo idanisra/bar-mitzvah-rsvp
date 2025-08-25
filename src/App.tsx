@@ -22,7 +22,6 @@ function App() {
         sx={{
           position: 'relative',
           minHeight: '100vh',
-          overflow: 'hidden',
           '&::before': {
             content: '""',
             position: 'fixed',

@@ -24,7 +24,7 @@ const EventInfoCard = ({
     <Grid item {...gridProps}>
       <Card sx={{ height: '100%', textAlign: 'center' }}>
         <CardContent>
-          <Box sx={{ fontSize: 40, color: 'primary.main', mb: 1 }}>
+          <Box sx={{ fontSize: 40, color: 'primary.main', mb: 3 }}>
             {icon}
           </Box>
           <Typography variant="h6" gutterBottom>

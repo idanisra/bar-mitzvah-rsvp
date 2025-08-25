@@ -123,7 +123,7 @@ const EnhancedEventMap = ({ events, titleHebrew = "מיקומי האירועים
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <LocationOn sx={{
                       color: index === 0 ? theme.palette.primary.main : theme.palette.secondary.main,
-                      ml: 1,
+                      ml: 3,
                       fontSize: 28
                     }} />
                     <Typography variant="h6" sx={{ fontWeight: 600 }}>

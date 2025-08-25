@@ -20,19 +20,8 @@ const EventDetails = () => {
           sx={{ 
             mb: 1,
             fontWeight: 700,
-            color: theme.palette.primary.main,
+            color: '#DAA520', // Gold color
             textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
-          }}
-        >
-          {event.nameHebrew}
-        </Typography>
-        <Typography 
-          variant="h5" 
-          component="h2" 
-          sx={{ 
-            mb: 2,
-            color: theme.palette.text.secondary,
-            fontWeight: 400
           }}
         >
           {event.nameHebrew}
@@ -42,9 +31,29 @@ const EventDetails = () => {
       {/* Event Information Cards */}
       <Grid container spacing={3} sx={{ mb: 2 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', textAlign: 'center' }}>
+          <Card sx={{ 
+            height: '100%', 
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)'
+          }}>
             <CardContent>
-              <CalendarToday sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
+              <Box sx={{ 
+                fontSize: 40, 
+                color: '#1e3a8a',
+                mb: 1,
+                backgroundColor: 'transparent',
+                borderRadius: '50%',
+                width: 60,
+                height: 60,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mx: 'auto'
+              }}>
+                <CalendarToday />
+              </Box>
               <Typography variant="h6" gutterBottom>
                 תאריך
               </Typography>
@@ -59,9 +68,29 @@ const EventDetails = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', textAlign: 'center' }}>
+          <Card sx={{ 
+            height: '100%', 
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)'
+          }}>
             <CardContent>
-              <LocationOn sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
+              <Box sx={{ 
+                fontSize: 40, 
+                color: '#1e3a8a',
+                mb: 1,
+                backgroundColor: 'transparent',
+                borderRadius: '50%',
+                width: 60,
+                height: 60,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mx: 'auto'
+              }}>
+                <LocationOn />
+              </Box>
               <Typography variant="h6" gutterBottom>
                 מיקום
               </Typography>
@@ -76,9 +105,29 @@ const EventDetails = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', textAlign: 'center' }}>
+          <Card sx={{ 
+            height: '100%', 
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)'
+          }}>
             <CardContent>
-              <AccessTime sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
+              <Box sx={{ 
+                fontSize: 40, 
+                color: '#1e3a8a',
+                mb: 1,
+                backgroundColor: 'transparent',
+                borderRadius: '50%',
+                width: 60,
+                height: 60,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mx: 'auto'
+              }}>
+                <AccessTime />
+              </Box>
               <Typography variant="h6" gutterBottom>
                 שעה
               </Typography>
@@ -95,9 +144,29 @@ const EventDetails = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', textAlign: 'center' }}>
+          <Card sx={{ 
+            height: '100%', 
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)'
+          }}>
             <CardContent>
-              <Style sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
+              <Box sx={{ 
+                fontSize: 50, 
+                color: '#1e3a8a',
+                mb: 1,
+                backgroundColor: 'transparent',
+                borderRadius: '50%',
+                width: 70,
+                height: 70,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mx: 'auto'
+              }}>
+                <Style />
+              </Box>
               <Typography variant="h6" gutterBottom>
                 קוד לבוש
               </Typography>

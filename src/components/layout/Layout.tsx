@@ -17,8 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Container component="main" sx={{ 
         flex: 1, 
         py: 4,
-        pt: 8, // Add top padding to account for fixed navigation
-        position: 'relative' // Ensure proper positioning context
+        position: 'relative'
       }}>
         {children}
       </Container>

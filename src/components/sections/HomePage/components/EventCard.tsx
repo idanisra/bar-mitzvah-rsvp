@@ -10,7 +10,7 @@ const EventCard = ({ icon, title, details }: EventCardProps) => {
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
-        <Box sx={{ mb: 2, fontSize: '3rem' }}>
+        <Box sx={{ mb: 4, fontSize: '3rem' }}>
           {icon}
         </Box>
         <Typography variant="h6" component="h3" gutterBottom>

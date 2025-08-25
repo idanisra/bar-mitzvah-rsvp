@@ -18,12 +18,28 @@ const EventSelector = () => {
   return (
     <Box sx={{ textAlign: 'center', mb: 2 }}>
       <Typography 
-        variant="h5" 
-        component="h2" 
+        variant="h1" 
         sx={{ 
-          mb: 1,
-          fontWeight: 600,
-          color: theme.palette.primary.main
+          mb: 2, 
+          mt: 0, // No top margin to bring text as close as possible to top bar
+          textAlign: 'center',
+          color: '#DAA520', // Gold color
+          fontWeight: 700,
+          fontFamily: 'Stam, serif',
+          fontSize: '8rem', // Doubled from 4rem to 8rem
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+        }}
+      >
+        דניאל
+      </Typography>
+      
+      <Typography 
+        variant="h6" 
+        sx={{ 
+          mb: 2, 
+          textAlign: 'center',
+          color: '#DAA520', // Gold color
+          fontWeight: 600
         }}
       >
         בחירת אירוע

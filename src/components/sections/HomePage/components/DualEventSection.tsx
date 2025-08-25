@@ -20,16 +20,6 @@ const DualEventSection = () => {
         >
           ✨ מיוחד לשני האירועים ✨
         </Typography>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            color: theme.palette.text.secondary,
-            maxWidth: 800,
-            mx: 'auto'
-          }}
-        >
-          אתם מוזמנים לשתי החגיגות! הנה כל מה שאתם צריכים לדעת לחוויה המלאה.
-        </Typography>
       </Box>
 
       {/* Weekend Timeline */}
