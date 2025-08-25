@@ -35,7 +35,7 @@ const AdditionalInfoSection = () => {
           מידע נוסף
         </Typography>
         
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={3} justifyContent="center">
           {infoData.map((info, index) => (
             <Grid item xs={12} md={6} key={index}>
               <InfoCard {...info} />

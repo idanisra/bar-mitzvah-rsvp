@@ -11,28 +11,19 @@ const EventSelector = () => {
     newEvent: string | null,
   ) => {
     if (newEvent !== null) {
-      setCurrentEvent(newEvent as any);
+      setCurrentEvent(newEvent as 'shabbat-chatan' | 'hanachat-tefillin');
     }
   };
 
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      mb: 4,
-      p: 2,
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      borderRadius: 2,
-      backdropFilter: 'blur(10px)',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
-    }}>
+    <Box sx={{ textAlign: 'center', mb: 2 }}>
       <Typography 
-        variant="h6" 
+        variant="h5" 
+        component="h2" 
         sx={{ 
-          mb: 2, 
-          color: theme.palette.primary.main,
-          fontWeight: 600
+          mb: 1,
+          fontWeight: 600,
+          color: theme.palette.primary.main
         }}
       >
         בחירת אירוע
@@ -48,11 +39,12 @@ const EventSelector = () => {
             px: 3,
             py: 1.5,
             border: `2px solid ${theme.palette.primary.main}`,
-            color: theme.palette.primary.main,
+            color: 'white',
             fontWeight: 600,
             textTransform: 'none',
             minWidth: 140,
             borderRadius: '8px',
+            backgroundColor: 'transparent',
             '&:first-of-type': {
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
@@ -62,14 +54,15 @@ const EventSelector = () => {
               borderBottomRightRadius: 0,
             },
             '&.Mui-selected': {
-              backgroundColor: theme.palette.primary.main,
-              color: 'white',
+              backgroundColor: 'white',
+              color: theme.palette.primary.main,
+              borderColor: theme.palette.primary.main,
               '&:hover': {
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
               }
             },
             '&:hover': {
-              backgroundColor: 'rgba(25, 118, 210, 0.08)',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
             }
           }
         }}

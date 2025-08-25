@@ -16,7 +16,7 @@ const EventInfoGrid = ({ event }: EventInfoGridProps) => {
         icon={<CalendarToday sx={{ fontSize: 40, color: theme.palette.primary.main }} />}
         title="תאריך"
         primaryText={event.dateHebrew}
-        secondaryText={event.dateHebrew}
+        secondaryText={event.dateGregorian || ''}
       />
       
       <EventInfoCard

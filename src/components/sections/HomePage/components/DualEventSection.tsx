@@ -6,13 +6,13 @@ const DualEventSection = () => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ mb: 6 }}>
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
+    <Box sx={{ mb: 3 }}>
+      <Box sx={{ textAlign: 'center', mb: 2 }}>
         <Typography 
           variant="h4" 
           component="h2" 
           sx={{ 
-            mb: 2,
+            mb: 1,
             fontWeight: 700,
             color: theme.palette.secondary.main,
             textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
@@ -55,7 +55,7 @@ const DualEventSection = () => {
             }
           }}
         >
-          אישור השתתפות לשתי האירועים
+          אישור השתתפות לשני האירועים
         </Button>
       </Box>
     </Box>

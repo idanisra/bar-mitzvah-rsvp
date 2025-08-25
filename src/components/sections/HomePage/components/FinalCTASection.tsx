@@ -13,18 +13,18 @@ const FinalCTASection = () => {
   };
 
   return (
-    <Box >
-      <Box >
+    <Box sx={{ mb: 2 }}>
+      <Box sx={{ textAlign: 'center', mb: 2 }}>
         <Typography
           variant={isMobile ? 'h3' : 'h2'}
-          
+          sx={{ mb: 1 }}
         >
           נשמח לראותכם!
         </Typography>
         
         <Typography
           variant={isMobile ? 'h6' : 'h5'}
-          
+          sx={{ mb: 2 }}
         >
           בואו לחגוג איתנו את בר המצווה המיוחד של דניאל
         </Typography>

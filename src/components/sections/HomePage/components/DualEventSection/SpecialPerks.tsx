@@ -29,7 +29,7 @@ const SpecialPerks = () => {
   ];
 
   return (
-    <Grid container spacing={3} sx={{ mb: 4 }}>
+    <Grid container spacing={3} sx={{ mb: 2 }}>
       {perks.map((perk, index) => (
         <Grid item xs={12} sm={6} md={3} key={index}>
           <Card sx={{ height: '100%', textAlign: 'center' }}>

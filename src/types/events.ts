@@ -2,8 +2,11 @@ export interface Event {
   id: string;
   nameHebrew: string;
   dateHebrew: string;
+  dateGregorian?: string;
   locationHebrew: string;
   addressHebrew: string;
+  phoneNumber?: string;
+  website?: string;
   coordinates: {
     lat: number;
     lng: number;

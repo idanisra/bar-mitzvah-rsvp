@@ -3,11 +3,9 @@ import EventSelector from '../../common/EventSelector';
 import EventDetails from '../../common/EventDetails';
 import DualEventSection from './components/DualEventSection';
 import HeroSection from './components/HeroSection';
-import EventHighlightsSection from './components/EventHighlightsSection';
 import InfoCardsSection from './components/InfoCardsSection';
-import AdditionalInfoSection from './components/AdditionalInfoSection';
 import FinalCTASection from './components/FinalCTASection';
-import InteractiveMap from '../../common/InteractiveMap';
+import EnhancedEventMap from '../../common/EnhancedEventMap';
 import { getAllEvents } from '../../../config/events';
 
 const HomePage = () => {
@@ -18,46 +16,36 @@ const HomePage = () => {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* Event Selector */}
-      <Container maxWidth="lg">
+      {/* Event Selector - Moved to top */}
+      <Container maxWidth="lg" sx={{ mt: 0.5, mb: 3 }}>
         <EventSelector />
       </Container>
 
       {/* Event Details */}
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ mb: 3 }}>
         <EventDetails />
       </Container>
 
-      {/* Interactive Event Map */}
-      <Container maxWidth="lg">
-        <InteractiveMap 
+      {/* Enhanced Event Map */}
+      <Container maxWidth="lg" sx={{ mb: 3 }}>
+        <EnhancedEventMap 
           events={allEvents}
           titleHebrew="מיקומי האירועים"
         />
       </Container>
 
       {/* Special Section for Dual Event Guests */}
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ mb: 3 }}>
         <DualEventSection />
       </Container>
 
-      {/* Event Highlights */}
-      <Container maxWidth="lg">
-        <EventHighlightsSection />
-      </Container>
-
       {/* Information Cards */}
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ mb: 3 }}>
         <InfoCardsSection />
       </Container>
 
-      {/* Additional Information Section */}
-      <Container maxWidth="lg">
-        <AdditionalInfoSection />
-      </Container>
-
       {/* Final Call to Action */}
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ mb: 3 }}>
         <FinalCTASection />
       </Container>
     </Box>

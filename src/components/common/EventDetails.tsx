@@ -11,14 +11,14 @@ const EventDetails = () => {
   if (!event) return null;
 
   return (
-    <Box sx={{ mb: 6 }}>
+    <Box sx={{ mb: 3 }}>
       {/* Event Header */}
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
+      <Box sx={{ textAlign: 'center', mb: 2 }}>
         <Typography 
           variant="h3" 
           component="h1" 
           sx={{ 
-            mb: 2,
+            mb: 1,
             fontWeight: 700,
             color: theme.palette.primary.main,
             textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
@@ -30,7 +30,7 @@ const EventDetails = () => {
           variant="h5" 
           component="h2" 
           sx={{ 
-            mb: 3,
+            mb: 2,
             color: theme.palette.text.secondary,
             fontWeight: 400
           }}
@@ -40,13 +40,13 @@ const EventDetails = () => {
       </Box>
 
       {/* Event Information Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={3} sx={{ mb: 2 }}>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: '100%', textAlign: 'center' }}>
             <CardContent>
               <CalendarToday sx={{ fontSize: 40, color: theme.palette.primary.main, mb: 1 }} />
               <Typography variant="h6" gutterBottom>
-                Date
+                תאריך
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                 {event.dateHebrew}
@@ -113,15 +113,12 @@ const EventDetails = () => {
       </Grid>
 
       {/* Event Description */}
-      <Card sx={{ mb: 4, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
+      <Card sx={{ mb: 2, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
         <CardContent>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
             על האירוע
           </Typography>
           <Typography variant="body1" paragraph>
-            {event.descriptionHebrew}
-          </Typography>
-          <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
             {event.descriptionHebrew}
           </Typography>
         </CardContent>

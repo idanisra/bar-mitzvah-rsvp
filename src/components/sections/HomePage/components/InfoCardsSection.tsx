@@ -24,8 +24,8 @@ const InfoCardsSection = () => {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ mb: 6 }}>
-      <Grid container spacing={4}>
+    <Container maxWidth="lg" sx={{ mb: 3 }}>
+      <Grid container spacing={3}>
         {infoCards.map((card, index) => (
           <Grid item xs={12} md={6} key={index}>
             <InfoCard

@@ -7,9 +7,9 @@ const WeekendTimeline = () => {
   const hanachatEvent = EVENTS['hanachat-tefillin'];
 
   return (
-    <Card sx={{ mb: 4, backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
+    <Card sx={{ mb: 2, backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
       <CardContent>
-        <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
+        <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 2 }}>
           🗓️ לו״ז לשבת
         </Typography>
         
