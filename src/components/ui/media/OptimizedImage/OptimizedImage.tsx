@@ -17,8 +17,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   width = '100%',
   height = 'auto',
   sx = {},
-  priority = false,
-  placeholder
+  priority = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);

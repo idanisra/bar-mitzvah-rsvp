@@ -21,7 +21,7 @@ export const useOfflineSupport = (options: OfflineSupportOptions = {}) => {
 
   const checkConnection = useCallback(async () => {
     try {
-      const response = await fetch('/api/health', { 
+      await fetch('/api/health', { 
         method: 'HEAD',
         cache: 'no-cache',
         mode: 'no-cors'

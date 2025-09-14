@@ -61,7 +61,7 @@ export const useTouchOptimization = (options: TouchOptimizationOptions = {}) => 
     }
   }, [onTap, longPressDelay, preventDefault]);
 
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+  const handleTouchMove = useCallback((_e: React.TouchEvent) => {
     if (longPressTimer.current) {
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
