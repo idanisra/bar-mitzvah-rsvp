@@ -1,18 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, CssBaseline, Box } from '@mui/material';
+import { ThemeProvider, CssBaseline, Box, CircularProgress } from '@mui/material';
+import { Suspense, lazy } from 'react';
 
-// Import our clean theme
 import { theme } from './styles/theme';
-
-// Context
 import { EventProvider } from './contexts/EventContext';
-
-// Layout Components
 import Layout from './components/layout/Layout';
 
-// Page Components
-import HomePage from './components/sections/HomePage/HomePage';
-import RSVPPage from './components/sections/RSVPPage/RSVPPage';
+const HomePage = lazy(() => import('./components/sections/HomePage/HomePage'));
+const RSVPPage = lazy(() => import('./components/sections/RSVPPage/RSVPPage'));
+const PageLoader = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '50vh',
+    }}
+  >
+    <CircularProgress size={60} sx={{ color: '#1e3a8a' }} />
+  </Box>
+);
 
 function App() {
   return (
@@ -30,24 +37,22 @@ function App() {
             right: 0,
             bottom: 0,
             backgroundImage: 'url(/Background.jpeg)',
-            backgroundSize: '100% auto',
+            backgroundSize: '100% 100%',
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',
             zIndex: -1,
-            '@media (max-width: 768px)': {
-              backgroundSize: '100% 100%',
-            },
-            backgroundColor: 'rgba(139, 69, 19, 0.1)',
           }
         }}
       >
         <EventProvider>
           <Router>
             <Layout>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/rsvp" element={<RSVPPage />} />
-              </Routes>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/rsvp" element={<RSVPPage />} />
+                </Routes>
+              </Suspense>
             </Layout>
           </Router>
         </EventProvider>

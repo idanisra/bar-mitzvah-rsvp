@@ -1,28 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   AppBar, 
   Toolbar, 
   Typography, 
-  Button, 
   IconButton, 
   Drawer, 
   List, 
   ListItem, 
   ListItemText, 
-  Box, 
-  useTheme,
-  useMediaQuery 
+  Box
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
-import BackgroundMusic from '../common/BackgroundMusic';
+import { Menu as MenuIcon, Close as CloseIcon, VolumeUp, VolumeOff, Star, Celebration } from '@mui/icons-material';
 
 const Navigation = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(false); // Start unmuted by default
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const menuItems = [
     { path: '/', label: 'בית' },
@@ -37,36 +33,222 @@ const Navigation = () => {
     }
   };
 
+  // Initialize audio on component mount
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/Ishay Ribo.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.3; // Set volume to 30%
+      audioRef.current.preload = 'auto';
+      audioRef.current.muted = false;
+      
+      // Try to play immediately
+      audioRef.current.play().catch(error => {
+        console.log('Auto-play failed:', error);
+      });
+    }
+  }, []);
+
+  // Handle mute/unmute functionality
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.pause();
+      } else {
+        // Play music when unmuted
+        audioRef.current.play().catch(error => {
+          console.log('Audio play failed:', error);
+          // Some browsers require user interaction before playing audio
+        });
+      }
+    }
+  }, [isMuted]);
+
+  // Cleanup audio on component unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleMuteToggle = () => {
+    setIsMuted(prev => !prev);
+  };
+
   const drawer = (
-    <List>
-      {menuItems.map((item) => (
-        <ListItem 
-          button 
-          key={item.path}
-          onClick={() => handleNavigation(item.path)}
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Header Section */}
+      <Box
+        sx={{
+          p: 3,
+          textAlign: 'center',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(10px)',
+          borderTopLeftRadius: '24px',
+          position: 'relative',
+        }}
+      >
+        {/* Close Button */}
+        <IconButton
+          onClick={() => setMobileOpen(false)}
           sx={{
-            textAlign: 'center',
+            position: 'absolute',
+            top: 12,
+            right: 12,
+            color: 'rgba(255, 255, 255, 0.8)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            width: 40,
+            height: 40,
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             '&:hover': {
-              backgroundColor: 'rgba(30, 58, 138, 0.1)',
+              background: 'rgba(255, 255, 255, 0.2)',
+              color: '#ffffff',
+              transform: 'scale(1.1)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+            },
+            '&:active': {
+              transform: 'scale(0.95)',
             }
           }}
+          aria-label="סגור תפריט"
         >
-          <ListItemText 
-            primary={item.label} 
-            sx={{ 
-              color: '#1e3a8a',
-              fontWeight: 600
+          <CloseIcon sx={{ fontSize: 20 }} />
+        </IconButton>
+
+        <Typography
+          variant="h5"
+          sx={{
+            color: '#ffffff',
+            fontWeight: 700,
+            textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+            mb: 1,
+            pr: 5, // Add padding to avoid overlap with close button
+          }}
+        >
+          בר מצווה לדניאל
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'rgba(255, 255, 255, 0.8)',
+            fontSize: '0.9rem',
+            pr: 5, // Add padding to avoid overlap with close button
+          }}
+        >
+          שמחת בר המצווה
+        </Typography>
+      </Box>
+
+      {/* Menu Items */}
+      <List sx={{ flex: 1, pt: 2 }}>
+        {menuItems.map((item, index) => (
+          <ListItem 
+            key={item.path}
+            onClick={() => handleNavigation(item.path)}
+            sx={{
+              mx: 2,
+              mb: 1,
+              borderRadius: 3,
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              background: location.pathname === item.path 
+                ? 'rgba(255, 255, 255, 0.15)' 
+                : 'transparent',
+              border: location.pathname === item.path 
+                ? '1px solid rgba(255, 255, 255, 0.2)' 
+                : '1px solid transparent',
+              backdropFilter: location.pathname === item.path ? 'blur(10px)' : 'none',
+              boxShadow: location.pathname === item.path 
+                ? '0 8px 32px rgba(0, 0, 0, 0.1)' 
+                : 'none',
+              animation: `slideInRight 0.6s ease-out ${index * 0.1}s both`,
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.1)',
+                transform: 'translateX(-8px)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+              },
+              '&:active': {
+                transform: 'translateX(-4px) scale(0.98)',
+              },
+              '@keyframes slideInRight': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateX(30px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                },
+              }
             }}
-          />
-        </ListItem>
-      ))}
-    </List>
+          >
+            <ListItemText 
+              primary={item.label} 
+              sx={{ 
+                color: '#ffffff',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                textAlign: 'right',
+                '& .MuiListItemText-primary': {
+                  textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                }
+              }}
+            />
+            {location.pathname === item.path && (
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: '#ffffff',
+                  ml: 2,
+                  boxShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+                  animation: 'pulse 2s ease-in-out infinite',
+                  '@keyframes pulse': {
+                    '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                    '50%': { opacity: 0.7, transform: 'scale(1.2)' }
+                  }
+                }}
+              />
+            )}
+          </ListItem>
+        ))}
+      </List>
+
+      {/* Footer Section */}
+      <Box
+        sx={{
+          p: 3,
+          textAlign: 'center',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(0, 0, 0, 0.1)',
+          borderBottomLeftRadius: '24px',
+        }}
+      >
+        <Typography
+          variant="caption"
+          sx={{
+            color: 'rgba(255, 255, 255, 0.7)',
+            fontSize: '0.8rem',
+          }}
+        >
+          נשמח לראותכם בשמחתנו! 🎉
+        </Typography>
+      </Box>
+    </Box>
   );
 
   return (
-    <AppBar 
-      position="fixed" 
-      sx={{ 
+    <AppBar
+      position="fixed"
+      sx={{
         background: 'rgba(255, 255, 255, 0.3)',
         backdropFilter: 'blur(10px)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
@@ -76,112 +258,156 @@ const Navigation = () => {
       }}
     >
       <Toolbar sx={{ position: 'relative', minHeight: '64px' }}>
-        {/* Main Title - Absolutely Centered Across Entire Width */}
-        <Typography
-          variant="h5"
+        {/* Star and Celebration Icons */}
+        <Box
           sx={{
-            color: '#DAA520', // Gold color
-            fontWeight: 700,
-            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             position: 'absolute',
             left: '50%',
             top: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '100%',
-            textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            gap: 2,
             zIndex: 1
           }}
         >
-          בר מצווה לדניאל
-        </Typography>
-
-        {/* Left Side: Mobile Menu Button */}
-        {isMobile && (
-          <Box sx={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => setMobileOpen(true)}
-              sx={{ color: '#1e3a8a' }}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-        )}
-
-        {/* Right Side: Navigation Buttons + Music */}
-        <Box sx={{ 
-          position: 'absolute', 
-          right: 16, 
-          top: '50%', 
-          transform: 'translateY(-50%)', 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 2,
-          zIndex: 2
-        }}>
-          {/* Desktop Navigation */}
-          {!isMobile && (
-            <Box sx={{ display: 'flex', gap: 1 }}>
-              {menuItems.map((item) => (
-                <Button
-                  key={item.path}
-                  onClick={() => handleNavigation(item.path)}
-                  variant={location.pathname === item.path ? 'contained' : 'text'}
-                  sx={{
-                    color: '#1e3a8a',
-                    '&.MuiButton-contained': {
-                      backgroundColor: theme.palette.custom.navigation.active,
-                      background: `linear-gradient(135deg, ${theme.palette.custom.navigation.active} 0%, ${theme.palette.primary.light} 100%)`,
-                      color: theme.palette.custom.navigation.text,
-                      '&:hover': {
-                        backgroundColor: theme.palette.primary.main,
-                        background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
-                      }
-                    },
-                    '&.MuiButton-text': {
-                      background: 'transparent',
-                      color: '#1e3a8a',
-                      border: '2px solid #1e3a8a',
-                      '&:hover': {
-                        backgroundColor: 'rgba(30, 58, 138, 0.1)',
-                        borderColor: '#1e40af',
-                      }
-                    }
-                  }}
-                >
-                  {item.label}
-                </Button>
-              ))}
-            </Box>
-          )}
-
-          {/* Background Music - Rightmost */}
-          <BackgroundMusic musicUrl="./Yismach Hatani.mp3?v=20240825" volume={0.5} />
+          <Star sx={{ fontSize: 24, color: '#FFD700' }} />
+          <Celebration sx={{ fontSize: 32, color: '#FFD700' }} />
+          <Star sx={{ fontSize: 24, color: '#FFD700' }} />
         </Box>
 
-        {/* Mobile Drawer */}
+        {/* Mute/Unmute Button - Top Left */}
+                <Box sx={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
+                  <IconButton
+                    color="inherit"
+                    aria-label={isMuted ? "unmute" : "mute"}
+                    onClick={handleMuteToggle}
+                    sx={{
+                      color: isMuted ? '#dc2626' : '#1e3a8a',
+                      background: 'rgba(255, 255, 255, 0.9)',
+                      backdropFilter: 'blur(10px)',
+                      border: isMuted ? '1px solid rgba(220, 38, 38, 0.2)' : '1px solid rgba(30, 58, 138, 0.2)',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&:hover': {
+                        background: isMuted ? 'rgba(220, 38, 38, 0.1)' : 'rgba(30, 58, 138, 0.1)',
+                        transform: 'scale(1.05)',
+                        boxShadow: '0 6px 16px rgba(0, 0, 0, 0.15)',
+                      },
+                      '&:active': {
+                        transform: 'scale(0.95)',
+                      }
+                    }}
+                  >
+                    {isMuted ? <VolumeOff sx={{ fontSize: 24 }} /> : <VolumeUp sx={{ fontSize: 24 }} />}
+                  </IconButton>
+                </Box>
+
+        {/* Hamburger Menu Button - Top Right */}
+        <Box sx={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={() => setMobileOpen(true)}
+            sx={{ 
+              color: '#1e3a8a',
+              background: 'rgba(255, 255, 255, 0.9)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(30, 58, 138, 0.2)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              '&:hover': {
+                background: 'rgba(30, 58, 138, 0.1)',
+                transform: 'scale(1.05)',
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.15)',
+              },
+              '&:active': {
+                transform: 'scale(0.95)',
+              }
+            }}
+          >
+            <MenuIcon sx={{ fontSize: 28 }} />
+          </IconButton>
+        </Box>
+
+        
         <Drawer
           variant="temporary"
           anchor="right"
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
           ModalProps={{
-            keepMounted: true, // Better mobile performance
+            keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: 240,
-              background: 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(10px)',
-              color: '#1e3a8a',
-              borderLeft: '1px solid rgba(255, 255, 255, 0.3)'
+              width: 280,
+              background: `
+                linear-gradient(135deg, 
+                  rgba(30, 58, 138, 0.95) 0%, 
+                  rgba(59, 130, 246, 0.9) 50%, 
+                  rgba(147, 197, 253, 0.85) 100%
+                )
+              `,
+              backdropFilter: 'blur(20px)',
+              color: '#ffffff',
+              borderRight: '1px solid rgba(255, 255, 255, 0.2)',
+              right: 0,
+              left: 'auto',
+              transform: mobileOpen ? 'translateX(0)' : 'translateX(100%)',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: mobileOpen 
+                ? '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)' 
+                : 'none',
+              position: 'relative',
+              overflow: 'hidden',
+              borderTopLeftRadius: '24px',
+              borderBottomLeftRadius: '24px',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: `
+                  radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%)
+                `,
+                zIndex: 0,
+              },
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: `
+                  linear-gradient(45deg, 
+                    transparent 0%, 
+                    rgba(255,255,255,0.05) 25%, 
+                    transparent 50%, 
+                    rgba(255,255,255,0.05) 75%, 
+                    transparent 100%
+                  )
+                `,
+                backgroundSize: '20px 20px',
+                animation: 'shimmer 3s ease-in-out infinite',
+                zIndex: 1,
+                '@keyframes shimmer': {
+                  '0%': { transform: 'translateX(-100%)' },
+                  '100%': { transform: 'translateX(100%)' }
+                }
+              }
             },
           }}
         >
-          {drawer}
+          <Box sx={{ position: 'relative', zIndex: 2, height: '100%' }}>
+            {drawer}
+          </Box>
         </Drawer>
       </Toolbar>
     </AppBar>

@@ -43,6 +43,7 @@ aux/                     # Non-code files
 ## 🚀 **Getting Started**
 
 1. **Install Dependencies**:
+
    ```bash
    cd aux/config
    npm install
@@ -53,11 +54,13 @@ aux/                     # Non-code files
    - Or copy your existing firebase config
 
 3. **Run Development Server**:
+
    ```bash
    npm run dev
    ```
 
 4. **Build for Production**:
+
    ```bash
    npm run build
    ```
@@ -65,18 +68,21 @@ aux/                     # Non-code files
 ## 🏛️ **Architecture Principles**
 
 ### **Component Structure**
+
 - **Single Responsibility**: Each component has one clear purpose
 - **Small & Focused**: Components are under 50 lines when possible
 - **Reusable**: Generic components that can be used across the app
 - **Props-Based**: Clean prop interfaces for easy testing
 
 ### **File Organization**
+
 - **Co-location**: Styles and components live together
 - **Logical Grouping**: Related components in the same folder
 - **Clear Naming**: Descriptive file and folder names
 - **Consistent Patterns**: Same structure across all components
 
 ### **State Management**
+
 - **Custom Hooks**: Organized state logic in reusable hooks
 - **Local State**: Component-specific state stays in the component
 - **Shared State**: Common state moved to appropriate hooks
@@ -85,16 +91,19 @@ aux/                     # Non-code files
 ## 🎨 **Design System**
 
 ### **Colors**
+
 - **Primary**: Teal (#008080, #20B2AA, #48D1CC)
 - **Secondary**: Gold (#FFD700, #FFA500)
 - **Accent**: Orange (#FF8C00, #FF6347, #FF4500)
 
 ### **Typography**
+
 - **Font Family**: Heebo (Hebrew-optimized)
 - **Scale**: Consistent typography scale
 - **Responsive**: Adapts to screen size
 
 ### **Components**
+
 - **Cards**: Glassmorphism with backdrop blur
 - **Buttons**: Gradient backgrounds with hover effects
 - **Forms**: Clean, accessible form fields
@@ -119,11 +128,13 @@ aux/                     # Non-code files
 ## 🚀 **Deployment**
 
 1. **Build the App**:
+
    ```bash
    npm run build
    ```
 
 2. **Deploy to Firebase**:
+
    ```bash
    firebase deploy
    ```
