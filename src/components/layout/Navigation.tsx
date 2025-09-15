@@ -124,7 +124,7 @@ const Navigation = () => {
         <Typography
           variant="h5"
           sx={{
-            color: '#ffffff',
+            color: '#FFD700',
             fontWeight: 700,
             textShadow: '0 2px 4px rgba(0,0,0,0.3)',
             mb: 1,
@@ -146,14 +146,15 @@ const Navigation = () => {
       </Box>
 
       {/* Menu Items */}
-      <List sx={{ flex: 1, pt: 2 }}>
+      <List sx={{ flex: 1, pt: 2, px: 2 }}>
         {menuItems.map((item, index) => (
           <ListItem 
             key={item.path}
             onClick={() => handleNavigation(item.path)}
             sx={{
-              mx: 2,
+              mx: 0,
               mb: 1,
+              px: 3,
               borderRadius: 3,
               cursor: 'pointer',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -207,9 +208,9 @@ const Navigation = () => {
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: '#FFD700',
                   ml: 2,
-                  boxShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+                  boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
                   animation: 'pulse 2s ease-in-out infinite',
                   '@keyframes pulse': {
                     '0%, 100%': { opacity: 1, transform: 'scale(1)' },
@@ -334,7 +335,7 @@ const Navigation = () => {
         
         <Drawer
           variant="temporary"
-          anchor="right"
+          anchor="left"
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
           ModalProps={{
@@ -343,7 +344,7 @@ const Navigation = () => {
           sx={{
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: 280,
+              width: 260,
               background: `
                 linear-gradient(135deg, 
                   rgba(30, 58, 138, 0.95) 0%, 
@@ -357,11 +358,11 @@ const Navigation = () => {
               right: 0,
               left: 'auto',
               transform: mobileOpen ? 'translateX(0)' : 'translateX(100%)',
+              position: 'fixed',
               transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               boxShadow: mobileOpen 
                 ? '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)' 
                 : 'none',
-              position: 'relative',
               overflow: 'hidden',
               borderTopLeftRadius: '24px',
               borderBottomLeftRadius: '24px',
@@ -378,30 +379,6 @@ const Navigation = () => {
                 `,
                 zIndex: 0,
               },
-              '&::after': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: `
-                  linear-gradient(45deg, 
-                    transparent 0%, 
-                    rgba(255,255,255,0.05) 25%, 
-                    transparent 50%, 
-                    rgba(255,255,255,0.05) 75%, 
-                    transparent 100%
-                  )
-                `,
-                backgroundSize: '20px 20px',
-                animation: 'shimmer 3s ease-in-out infinite',
-                zIndex: 1,
-                '@keyframes shimmer': {
-                  '0%': { transform: 'translateX(-100%)' },
-                  '100%': { transform: 'translateX(100%)' }
-                }
-              }
             },
           }}
         >
