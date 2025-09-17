@@ -7,7 +7,10 @@ import { EventProvider } from './contexts/EventContext';
 import Layout from './components/layout/Layout';
 
 const HomePage = lazy(() => import('./components/sections/HomePage/HomePage'));
+const AboutDaniel = lazy(() => import('./components/sections/AboutDaniel/AboutDaniel'));
+const Contact = lazy(() => import('./components/sections/Contact/Contact'));
 const RSVPPage = lazy(() => import('./components/sections/RSVPPage/RSVPPage'));
+const EventDetailPage = lazy(() => import('./components/sections/EventDetailPage/EventDetailPage'));
 const PageLoader = () => (
   <Box
     sx={{
@@ -50,7 +53,10 @@ function App() {
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/about-daniel" element={<AboutDaniel />} />
+                  <Route path="/contact" element={<Contact />} />
                   <Route path="/rsvp" element={<RSVPPage />} />
+                  <Route path="/event/:eventId" element={<EventDetailPage />} />
                 </Routes>
               </Suspense>
             </Layout>

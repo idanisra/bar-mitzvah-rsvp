@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { 
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  IconButton, 
-  Drawer, 
-  List, 
-  ListItem, 
-  ListItemText, 
-  Box
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  Divider
 } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon, VolumeUp, VolumeOff, Star, Celebration } from '@mui/icons-material';
 
@@ -21,7 +22,20 @@ const Navigation = () => {
   const location = useLocation();
 
   const menuItems = [
-    { path: '/', label: 'בית' },
+    { path: '/', label: 'דף הבית' },
+    { path: '/about-daniel', label: 'על דניאל' }
+  ];
+
+  const eventItems = [
+    { path: '/event/shabbat-chatan', label: 'שבת חתן' },
+    { path: '/event/hanachat-tefillin', label: 'הנחת תפילין' }
+  ];
+
+  const contactItems = [
+    { path: '/contact', label: 'יצירת קשר' }
+  ];
+
+  const rsvpItems = [
     { path: '/rsvp', label: 'אישור השתתפות' }
   ];
 
@@ -221,6 +235,255 @@ const Navigation = () => {
             )}
           </ListItem>
         ))}
+
+        {/* Horizontal Separator */}
+        <Divider sx={{ 
+          my: 2, 
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          mx: 2
+        }} />
+
+        {/* Event Items */}
+        {eventItems.map((item, index) => (
+          <ListItem 
+            key={item.path}
+            onClick={() => handleNavigation(item.path)}
+            sx={{
+              mx: 0,
+              mb: 1,
+              px: 3,
+              borderRadius: 3,
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              background: location.pathname === item.path 
+                ? 'rgba(255, 255, 255, 0.15)' 
+                : 'transparent',
+              border: location.pathname === item.path 
+                ? '1px solid rgba(255, 255, 255, 0.2)' 
+                : '1px solid transparent',
+              backdropFilter: location.pathname === item.path ? 'blur(10px)' : 'none',
+              boxShadow: location.pathname === item.path 
+                ? '0 8px 32px rgba(0, 0, 0, 0.1)' 
+                : 'none',
+              animation: `slideInRight 0.6s ease-out ${(index + 1) * 0.1}s both`,
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.1)',
+                transform: 'translateX(-8px)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+              },
+              '&:active': {
+                transform: 'translateX(-4px) scale(0.98)',
+              },
+              '@keyframes slideInRight': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateX(30px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                },
+              }
+            }}
+          >
+            <ListItemText 
+              primary={item.label} 
+              sx={{ 
+                color: '#ffffff',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                textAlign: 'right',
+                '& .MuiListItemText-primary': {
+                  textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                }
+              }}
+            />
+            {location.pathname === item.path && (
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: '#FFD700',
+                  ml: 2,
+                  boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                  animation: 'pulse 2s ease-in-out infinite',
+                  '@keyframes pulse': {
+                    '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                    '50%': { opacity: 0.7, transform: 'scale(1.2)' }
+                  }
+                }}
+              />
+            )}
+          </ListItem>
+        ))}
+
+        {/* Horizontal Separator */}
+        <Divider sx={{ 
+          my: 2, 
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          mx: 2
+        }} />
+
+        {/* Contact Items */}
+        {contactItems.map((item, index) => (
+          <ListItem 
+            key={item.path}
+            onClick={() => handleNavigation(item.path)}
+            sx={{
+              mx: 0,
+              mb: 1,
+              px: 3,
+              borderRadius: 3,
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              background: location.pathname === item.path 
+                ? 'rgba(255, 255, 255, 0.15)' 
+                : 'transparent',
+              border: location.pathname === item.path 
+                ? '1px solid rgba(255, 255, 255, 0.2)' 
+                : '1px solid transparent',
+              backdropFilter: location.pathname === item.path ? 'blur(10px)' : 'none',
+              boxShadow: location.pathname === item.path 
+                ? '0 8px 32px rgba(0, 0, 0, 0.1)' 
+                : 'none',
+              animation: `slideInRight 0.6s ease-out ${(index + 3) * 0.1}s both`,
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.1)',
+                transform: 'translateX(-8px)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+              },
+              '&:active': {
+                transform: 'translateX(-4px) scale(0.98)',
+              },
+              '@keyframes slideInRight': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateX(30px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                },
+              }
+            }}
+          >
+            <ListItemText 
+              primary={item.label} 
+              sx={{ 
+                color: '#ffffff',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                textAlign: 'right',
+                '& .MuiListItemText-primary': {
+                  textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                }
+              }}
+            />
+            {location.pathname === item.path && (
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: '#FFD700',
+                  ml: 2,
+                  boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                  animation: 'pulse 2s ease-in-out infinite',
+                  '@keyframes pulse': {
+                    '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                    '50%': { opacity: 0.7, transform: 'scale(1.2)' }
+                  }
+                }}
+              />
+            )}
+          </ListItem>
+        ))}
+
+        {/* Horizontal Separator */}
+        <Divider sx={{ 
+          my: 2, 
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          mx: 2
+        }} />
+
+        {/* RSVP Items */}
+        {rsvpItems.map((item, index) => (
+          <ListItem 
+            key={item.path}
+            onClick={() => handleNavigation(item.path)}
+            sx={{
+              mx: 0,
+              mb: 1,
+              px: 3,
+              borderRadius: 3,
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              background: location.pathname === item.path 
+                ? 'rgba(255, 255, 255, 0.15)' 
+                : 'transparent',
+              border: location.pathname === item.path 
+                ? '1px solid rgba(255, 255, 255, 0.2)' 
+                : '1px solid transparent',
+              backdropFilter: location.pathname === item.path ? 'blur(10px)' : 'none',
+              boxShadow: location.pathname === item.path 
+                ? '0 8px 32px rgba(0, 0, 0, 0.1)' 
+                : 'none',
+              animation: `slideInRight 0.6s ease-out ${(index + 3) * 0.1}s both`,
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.1)',
+                transform: 'translateX(-8px)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+              },
+              '&:active': {
+                transform: 'translateX(-4px) scale(0.98)',
+              },
+              '@keyframes slideInRight': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateX(30px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                },
+              }
+            }}
+          >
+            <ListItemText 
+              primary={item.label} 
+              sx={{ 
+                color: '#ffffff',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                textAlign: 'right',
+                '& .MuiListItemText-primary': {
+                  textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                }
+              }}
+            />
+            {location.pathname === item.path && (
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: '#FFD700',
+                  ml: 2,
+                  boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                  animation: 'pulse 2s ease-in-out infinite',
+                  '@keyframes pulse': {
+                    '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                    '50%': { opacity: 0.7, transform: 'scale(1.2)' }
+                  }
+                }}
+              />
+            )}
+          </ListItem>
+        ))}
       </List>
 
       {/* Footer Section */}
@@ -259,7 +522,7 @@ const Navigation = () => {
       }}
     >
       <Toolbar sx={{ position: 'relative', minHeight: '64px' }}>
-        {/* Star and Celebration Icons */}
+        {/* Center Content - Icons for homepage, Text for event pages */}
         <Box
           sx={{
             display: 'flex',
@@ -273,9 +536,51 @@ const Navigation = () => {
             zIndex: 1
           }}
         >
-          <Star sx={{ fontSize: 24, color: '#FFD700' }} />
-          <Celebration sx={{ fontSize: 32, color: '#FFD700' }} />
-          <Star sx={{ fontSize: 24, color: '#FFD700' }} />
+          {location.pathname.startsWith('/event/') ? (
+            <Typography
+              variant="h6"
+              sx={{
+                color: location.pathname === '/event/shabbat-chatan' ? '#1976d2' : '#FFD700',
+                fontWeight: 700,
+                fontSize: '1.2rem',
+                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+              }}
+            >
+              {location.pathname === '/event/shabbat-chatan' ? 'שבת חתן' : 
+               location.pathname === '/event/hanachat-tefillin' ? 'הנחת תפילין' : 
+               'דניאל הגיע למצוות'}
+            </Typography>
+          ) : location.pathname === '/about-daniel' ? (
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#2e7d32',
+                fontWeight: 700,
+                fontSize: '1.2rem',
+                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+              }}
+            >
+              על דניאל
+            </Typography>
+          ) : location.pathname === '/contact' ? (
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#d32f2f',
+                fontWeight: 700,
+                fontSize: '1.2rem',
+                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+              }}
+            >
+              יצירת קשר
+            </Typography>
+          ) : (
+            <>
+              <Star sx={{ fontSize: 24, color: '#FFD700' }} />
+              <Celebration sx={{ fontSize: 32, color: '#FFD700' }} />
+              <Star sx={{ fontSize: 24, color: '#FFD700' }} />
+            </>
+          )}
         </Box>
 
         {/* Mute/Unmute Button - Top Left */}

@@ -27,7 +27,7 @@ const EventsSectionNew: React.FC<EventsSectionNewProps> = ({ events }) => {
       sx={{
         pt: 0,
         pb: 0,
-        mt: 0,
+        mt: -2,
         position: 'relative',
       }}
     >

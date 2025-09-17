@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Card, CardContent, Typography, Box, Chip, IconButton } from '@mui/material';
 import { LocationOn, AccessTime, Phone, Language } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { Event } from '../../../../types/events';
 
 interface Card3DProps {
@@ -16,13 +17,72 @@ const Card3D: React.FC<Card3DProps> = memo(({
   isSelected = false, 
   elevation = 8 
 }) => {
+  const navigate = useNavigate();
+  const [touchStart, setTouchStart] = React.useState<{ x: number; y: number; time: number } | null>(null);
+  const [isScrolling, setIsScrolling] = React.useState(false);
+
   const handleClick = () => {
     if (onClick) {
       onClick();
     }
+    // Navigate directly to event detail page
+    navigate(`/event/${event.id}`);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setTouchStart({
+      x: touch.clientX,
+      y: touch.clientY,
+      time: Date.now()
+    });
+    setIsScrolling(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    
+    const touch = e.touches[0];
+    const deltaX = Math.abs(touch.clientX - touchStart.x);
+    const deltaY = Math.abs(touch.clientY - touchStart.y);
+    
+    // If movement is more than 10px, consider it a scroll
+    if (deltaX > 10 || deltaY > 10) {
+      setIsScrolling(true);
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    
+    const touch = e.changedTouches[0];
+    const deltaX = Math.abs(touch.clientX - touchStart.x);
+    const deltaY = Math.abs(touch.clientY - touchStart.y);
+    const deltaTime = Date.now() - touchStart.time;
+    
+    // Only trigger click if:
+    // 1. It's not a scroll (movement < 10px)
+    // 2. Touch duration is reasonable (< 500ms)
+    // 3. Not already scrolling
+    if (!isScrolling && deltaX < 10 && deltaY < 10 && deltaTime < 500) {
+      e.preventDefault();
+      handleClick();
+    }
+    
+    setTouchStart(null);
+    setIsScrolling(false);
   };
 
   const handleWebsiteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (event.website) {
+      window.open(event.website, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const handleWebsiteTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     if (event.website) {
       window.open(event.website, '_blank', 'noopener,noreferrer');
@@ -31,34 +91,37 @@ const Card3D: React.FC<Card3DProps> = memo(({
   return (
     <Card
       onClick={handleClick}
-      sx={{
-        position: 'relative',
-        borderRadius: 4,
-        overflow: 'hidden',
-        cursor: onClick ? 'pointer' : 'default',
-        transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        boxShadow: `
-          0 ${elevation * 2}px ${elevation * 4}px rgba(0,0,0,0.1),
-          0 ${elevation}px ${elevation * 2}px rgba(0,0,0,0.06),
-          0 0 0 1px rgba(255,255,255,0.05)
-        `,
-        background: 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255,255,255,0.2)',
-        '&:hover': {
-          transform: 'translateY(-8px) scale(1.02)',
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+        sx={{
+          position: 'relative',
+          borderRadius: 4,
+          overflow: 'hidden',
+          cursor: onClick ? 'pointer' : 'default',
+          transform: isSelected ? 'scale(1.02)' : 'scale(1)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           boxShadow: `
-            0 ${elevation * 3}px ${elevation * 6}px rgba(0,0,0,0.15),
             0 ${elevation * 2}px ${elevation * 4}px rgba(0,0,0,0.1),
-            0 0 0 1px rgba(255,255,255,0.1)
+            0 ${elevation}px ${elevation * 2}px rgba(0,0,0,0.06),
+            0 0 0 1px rgba(255,255,255,0.05)
           `,
-        },
-        '&:active': {
-          transform: 'translateY(-4px) scale(0.98)',
-        }
-      }}
-    >
+          background: 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          '&:hover': {
+            transform: 'translateY(-8px) scale(1.02)',
+            boxShadow: `
+              0 ${elevation * 3}px ${elevation * 6}px rgba(0,0,0,0.15),
+              0 ${elevation * 2}px ${elevation * 4}px rgba(0,0,0,0.1),
+              0 0 0 1px rgba(255,255,255,0.1)
+            `,
+          },
+          '&:active': {
+            transform: 'translateY(-4px) scale(0.98)',
+          }
+        }}
+      >
       <Box
         sx={{
           position: 'relative',
@@ -194,6 +257,7 @@ const Card3D: React.FC<Card3DProps> = memo(({
               size="small" 
               sx={{ color: '#1976d2' }}
               onClick={handleWebsiteClick}
+              onTouchEnd={handleWebsiteTouchEnd}
             >
               <Language fontSize="small" />
             </IconButton>
